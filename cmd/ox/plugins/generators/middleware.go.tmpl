@@ -1,0 +1,10 @@
+package middleware
+
+import "github.com/gobuffalo/buffalo"
+
+func {{.Name}}(next buffalo.Handler) buffalo.Handler {
+    return func(c buffalo.Context) error {
+        // Do something before the next handler is called
+        return next(c)
+    }
+}
