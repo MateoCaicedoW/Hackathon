@@ -1,3 +1,8 @@
-require("expose-loader?exposes=$,jQuery!jquery");
-require("bootstrap/dist/js/bootstrap.bundle.js");
-require("@fortawesome/fontawesome-free/js/all.js");
+import { Application } from "@hotwired/stimulus"
+import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers" ;
+
+const application = Application.start();
+const context = require.context("./controllers", true, /\.js$/);
+application.load(definitionsFromContext(context));
+
+

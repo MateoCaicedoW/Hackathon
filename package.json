@@ -10,6 +10,8 @@
   "repository": "github.com/gobuffalo/buffalo",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.0",
+    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@popperjs/core": "^2.0.0",
     "bootstrap": "^5.0.0",
     "jquery": "^3.6.0",
