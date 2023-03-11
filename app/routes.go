@@ -22,6 +22,8 @@ func setRoutes(app *buffalo.App) {
 	authG := app.Group("/auth")
 	authG.GET("/login", auth.Login)
 
+	app.POST("/send-request", home.Create)
+
 	app.ServeFiles("/", http.FS(public.FS()))
 
 }
