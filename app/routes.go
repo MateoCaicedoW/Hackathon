@@ -3,9 +3,9 @@ package app
 import (
 	"net/http"
 
-	"hackathon/public"
 	"hackathon/app/actions/home"
 	"hackathon/app/middleware"
+	"hackathon/public"
 
 	"github.com/gobuffalo/buffalo"
 )
