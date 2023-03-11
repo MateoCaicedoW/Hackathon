@@ -216,3 +216,7 @@ func (p Person) SelectLabel() string {
 func (p Person) SelectValue() interface{} {
 	return p.ID
 }
+
+func (p Person) FullName() string {
+	return strings.Join([]string{p.FirstName, p.LastName}, " ")
+}

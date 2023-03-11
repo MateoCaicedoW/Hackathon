@@ -46,6 +46,13 @@ func setRoutes(app *buffalo.App) {
 	client.GET("/new", clients.New)
 	client.POST("/new", clients.Create)
 	client.GET("/", clients.List)
+	client.GET("/{client_id}", func(ctx buffalo.Context) error {
+		return nil
+	})
+
+	client.GET("/{client_id}/edit", clients.Edit)
+	client.PUT("/{client_id}", clients.Update).Name("updateClientPath")
+	client.DELETE("/{client_id}", clients.Delete).Name("deleteClientPath")
 
 	loan := admin.Group("/loans")
 	loan.GET("/", ls.List)
