@@ -1,29 +1,23 @@
 package app
 
 import (
-	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/envy"
-)
+	"hackathon/internal/environment"
 
-var (
-	root *buffalo.App
+	"github.com/gobuffalo/buffalo"
 )
 
 // App creates a new application with default settings and reading
 // GO_ENV. It calls setRoutes to setup the routes for the app that's being
 // created before returning it
-func New() *buffalo.App {
-	if root != nil {
-		return root
-	}
-
-	root = buffalo.New(buffalo.Options{
-		Env:         envy.Get("GO_ENV", "development"),
-		SessionName: "_hackathon_session",
+func New() (*buffalo.App, error) {
+	app := buffalo.New(buffalo.Options{
+		Env:         environment.Current(),
+		SessionName: environment.SessionName,
+		WorkerOff:   true,
 	})
 
-	// Setting the routes for the app
-	setRoutes(root)
+	setRoutes(app)
 
-	return root
+	return app, nil
+
 }

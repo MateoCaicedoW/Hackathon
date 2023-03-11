@@ -1,4 +1,5 @@
 package actions_test
+<<<<<<< Updated upstream
 
 import (
 	"hackathon/app"
@@ -15,3 +16,5 @@ func Test_ActionSuite(t *testing.T) {
 	as := &ActionSuite{suite.NewAction(app.New())}
 	suite.Run(t, as)
 }
+=======
+>>>>>>> Stashed changes
