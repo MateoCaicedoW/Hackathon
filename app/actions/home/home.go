@@ -29,18 +29,7 @@ func Create(c buffalo.Context) error {
 		return err
 	}
 
-	verrs, err := person.Validate(tx)
-	if err != nil {
-		return err
-	}
-
-	if verrs.HasAny() {
-		c.Set("person", person)
-		c.Set("errors", verrs)
-		return c.Render(http.StatusOK, r.HTML("home/index.plush.html"))
-	}
-
-	err = tx.Create(&person)
+	err := tx.Create(&person)
 	if err != nil {
 		return err
 	}

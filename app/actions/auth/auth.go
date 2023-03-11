@@ -27,17 +27,6 @@ func AuthCreate(c buffalo.Context) error {
 		return fmt.Errorf("error binding user: %w", err)
 	}
 
-	verrs, err := u.Validate(tx)
-	if err != nil {
-		return fmt.Errorf("error validating user: %w", err)
-	}
-
-	if verrs.HasAny() {
-		c.Set("user", u)
-		c.Set("errors", verrs)
-		return c.Render(http.StatusUnprocessableEntity, r.HTML("auth/login.html"))
-	}
-
 	if err := tx.Where("email = ? AND nit = ?", u.Email, u.NIT).First(u); err != nil {
 		return fmt.Errorf("error finding user: %w", err)
 	}
