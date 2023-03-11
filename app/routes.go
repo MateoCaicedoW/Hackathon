@@ -27,6 +27,8 @@ func setRoutes(app *buffalo.App) {
 	admin := app.Group("/admin")
 	admin.GET("/", index.PageIndex)
 
+	app.POST("/send-request", home.Create)
+
 	app.ServeFiles("/", http.FS(public.FS()))
 
 }

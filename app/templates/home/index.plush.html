@@ -1,3 +1,65 @@
-<div class="w-full bg-black">
-    <p class="text-white">AAA</p>
+<div class="w-full bg-blue-500" data-controller="index">
+    <div class="p-6 flex justify-between relative">
+        <div class="flex justify-center items-center">    
+            
+            <h1 class="text-white">Welcome to the home page!</h1>
+        </div>
+        <div class="flex gap-2">
+            <a href="/auth/login" class="text-white hidden lg:inline-block text-md font-bold">Log in</a>
+            <button class="flex lg:hidden">
+                <span class="material-symbols-outlined text-white" data-action="click->index#changeIcon" data-index-target="icon">
+                    menu
+                </span>
+            </button>
+        
+        </div>
+
+
+        <div class="absolute top-[70px] left-0 bg-blue-500 w-full p-6 hidden lg:hidden" data-index-target="navigation" >
+            <a href="/auth/login" class="text-white text-md font-bold">Log in</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="backgroud flex flex-col xl:flex-row justify-center xl:justify-between px-[30px]  xl:px-[200px]  bg-blue-50 ">
+    <div class="flex flex-col justify-center">
+        <%= form_for(person, {action: "/send-request", method: "POST", class: " bg-white shadow-md p-4 rounded-md", id: "" }){ %>
+            <div class="grid grid-cols-1 gap-6 '">
+                <div>
+                    <h3 class="text-lg leading-6 text-black">Request Access</h3>
+                    <p class="mt-2 text-md text-black"> Fill this with your data to request access to the application.</p>
+                </div>
+                <div class="col-span-2">
+                    <div class="mb-1">
+                        <%= f.InputTag("FirstName", { class: "text-black"}) %>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="mb-1">
+                        <%= f.InputTag("LastName", { class: "text-black"}) %>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="mb-1">
+                        <%= f.InputTag("NIT", { class: "text-black"}) %>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="mb-1">
+                        <%= f.InputTag("Email", { class: "text-black"}) %>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div class="mb-1">
+                        <%= f.InputTag("Phone", { class: "text-black"}) %>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white p-2 hover:bg-blue-400 rounded-md mt-4">
+                Send Request
+            </button>
+        <% } %>
+    </div>
+    <img src="https://zinobe-assets.s3.amazonaws.com/lineru-world-home/images/inicio/img-fold-1.png" class="hidden xl:inline-block" alt="image" >
 </div>

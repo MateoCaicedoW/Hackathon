@@ -38,7 +38,7 @@ func AuthCreate(c buffalo.Context) error {
 		return c.Render(http.StatusUnprocessableEntity, r.HTML("auth/login.html"))
 	}
 
-	if err := tx.Where("email = ? AND nit = ?", u.Email, u.Nit).First(u); err != nil {
+	if err := tx.Where("email = ? AND nit = ?", u.Email, u.NIT).First(u); err != nil {
 		return fmt.Errorf("error finding user: %w", err)
 	}
 
