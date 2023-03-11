@@ -3,6 +3,7 @@ package app
 import (
 	"net/http"
 
+	"hackathon/app/actions/auth"
 	"hackathon/app/actions/home"
 	"hackathon/app/middleware"
 	"hackathon/public"
@@ -11,12 +12,16 @@ import (
 )
 
 // SetRoutes for the application
-func setRoutes(root *buffalo.App) {
-	root.Use(middleware.RequestID)
-	root.Use(middleware.Database)
-	root.Use(middleware.ParameterLogger)
-	root.Use(middleware.CSRF)
+func setRoutes(app *buffalo.App) {
+	app.Use(middleware.RequestID)
+	app.Use(middleware.Database)
+	app.Use(middleware.ParameterLogger)
+	app.Use(middleware.CSRF)
 
-	root.GET("/", home.Index)
-	root.ServeFiles("/", http.FS(public.FS()))
+	app.GET("/", home.Index)
+	authG := app.Group("/auth")
+	authG.GET("/login", auth.Login)
+
+	app.ServeFiles("/", http.FS(public.FS()))
+
 }
