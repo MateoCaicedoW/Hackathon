@@ -8,3 +8,11 @@ type Account struct {
 	Number string    `json:"number" db:"number"`
 	Kind   string    `json:"kind" db:"kind"`
 }
+
+func (a Account) SelectLabel() string {
+	return a.Name
+}
+
+func (a Account) SelectValue() interface{} {
+	return a.ID
+}

@@ -5,6 +5,7 @@ import (
 
 	"hackathon/app/actions/account"
 	"hackathon/app/actions/auth"
+	"hackathon/app/actions/clients"
 	"hackathon/app/actions/home"
 	"hackathon/app/actions/index"
 	"hackathon/app/middleware"
@@ -38,6 +39,12 @@ func setRoutes(app *buffalo.App) {
 	accounts.GET("/{id}/edit", account.Edit)
 	accounts.PUT("/{id}", account.Update).Name("updateAccountPath")
 	accounts.DELETE("/{id}", account.Delete).Name("deleteAccountPath")
+	app.POST("/send-request", home.Create)
+
+	client := admin.Group("/clients")
+	client.GET("/new", clients.New)
+	client.POST("/new", clients.Create)
+	client.GET("/", clients.List)
 
 	app.ServeFiles("/", http.FS(public.FS()))
 

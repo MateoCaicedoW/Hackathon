@@ -1,0 +1,9 @@
+<div class="px-6 py-8 sm:rounded-lg sm:p-6">
+    <div class="flex flex-col ">
+      <div class="mt-5 md:mt-0 md:col-span-2">
+        <%= form_for(client, {action: "/admin/clients/new", method: "POST", class: "space-y-6", id: "newClient" }){ %>
+          <%= partial("clients/form.plush.html", {}) %>
+        <% } %>
+      </div>
+    </div>
+  </div>

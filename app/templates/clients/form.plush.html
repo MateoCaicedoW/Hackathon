@@ -1,0 +1,38 @@
+<div class="shadow sm:rounded-md divide-y divide-sixth-200">
+    <div class="py-6 px-4 space-y-6 sm:p-6 rounded-t-lg">
+        <div class="flex-col">
+            <div class="md:col-span-1">
+                <h3 class="text-lg leading-6 font-medium text-sixth-900">Basic Information</h3>
+                <p class="mt-1 text-sm text-sixth-500"> Fill in client basic information.</p>
+            </div>
+        
+            <div class="grid grid-cols-1 gap-6">
+                <div class="col-span-2">
+                   <div class="mb-1">
+                    <%= f.SelectTag("PersonID", {label: "Person",placeholder: "Select a person", containerClass: "col-span-3 sm:col-span-2", options: people}) %>
+                   </div>
+                </div>
+
+                <div class="col-span-2">
+                    <div class="mb1">
+                        <%= f.SelectTag("AccountID", {label: "Account", placeholder: "Select a person", containerClass: "col-span-3 sm:col-span-2", options: accounts}) %>
+                    </div>
+    
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+   
+    <div class="px-4 py-3 bg-sixth-50 text-right sm:px-6 rounded-b-lg">
+        <a href=""
+            class="bg-white border border-sixth-300 rounded-md shadow-sm text-sm mr-2 py-2 px-4 inline-flex justify-center font-medium text-sixth-700 hover:bg-sixth-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sixth-500">
+            Cancel
+        </a>
+        <button type="submit"
+            class="bg-blue-500 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-second-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-first-500">
+            Save
+        </button>
+    </div>
+</div>

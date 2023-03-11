@@ -1,0 +1,2 @@
+ALTER TABLE clients DROP COLUMN since;
+ALTER TABLE clients DROP COLUMN until;

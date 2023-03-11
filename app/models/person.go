@@ -208,3 +208,11 @@ func (u *Person) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		},
 	), nil
 }
+
+func (p Person) SelectLabel() string {
+	return strings.Join([]string{p.FirstName, p.LastName}, " ")
+}
+
+func (p Person) SelectValue() interface{} {
+	return p.ID
+}
