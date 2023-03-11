@@ -1,1 +1,12 @@
 <%= partial("partials/nav.plush.html") %>
+
+
+<div class="grid"
+  data-controller="chart"
+  data-chart-data-value='{ "labels": ["January", "February", "March", "April", "May", "June", "July"], "datasets": [{ "label": "My First dataset", "backgroundColor": "transparent", "borderColor": "#3B82F6", "data": [37, 83, 78, 54, 12, 5, 99] }] }'
+>
+  <canvas data-chart-target="canvas"></canvas>
+
+  <!-- You need to define this action -->
+  <button data-action="chart#update">Update me!</button>
+</div>s

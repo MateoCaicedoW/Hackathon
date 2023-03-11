@@ -27,26 +27,6 @@ func (u *Person) Validate(tx *pop.Connection) (*validate.Errors, error) {
 
 	return validate.Validate(
 		&validators.StringIsPresent{Field: u.FirstName, Name: "First Name"},
-		&validators.FuncValidator{
-			Fn: func() bool {
-				if u.FirstName != "" && !regexp.MustCompile(`^[a-zA-Z ]+$`).MatchString(u.FirstName) {
-					return false
-				}
-				return true
-			},
-			Name:    "First Name",
-			Message: "%s First Name must be letters only.",
-		},
-		&validators.FuncValidator{
-			Fn: func() bool {
-				if u.LastName != "" && !regexp.MustCompile(`^[a-zA-Z ]+$`).MatchString(u.LastName) {
-					return false
-				}
-				return true
-			},
-			Name:    "Last Name",
-			Message: "%s Last Name must be letters only.",
-		},
 		&validators.StringIsPresent{Field: u.LastName, Name: "Last Name"},
 		&validators.StringIsPresent{Field: u.Email, Name: "Email"},
 		&validators.StringIsPresent{
