@@ -1,0 +1,3 @@
+[[plugin]]
+  binary = "buffalo-auth@latest"
+  go_get = "github.com/gobuffalo/buffalo-auth@latest"
