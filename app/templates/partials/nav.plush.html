@@ -1,0 +1,34 @@
+<div class="w-full bg-blue-500" data-controller="index">
+    <div class="p-6 flex justify-between relative ">
+        <div class="flex justify-center items-center">    
+
+        </div>
+        <div class="flex gap-2">
+            <div class="flex gap-4">
+                <a href="/admin" class="text-white hidden lg:inline-block text-md font-bold">Home</a>
+                <a href="/admin/accounts" class="text-white hidden lg:inline-block text-md font-bold">Accounts</a>
+                <a href="/auth/login" class="text-white hidden lg:inline-block text-md font-bold">Accounts</a>
+                <a href="/auth/login" class="text-white hidden lg:inline-block text-md font-bold">Accounts</a>
+                <a href="/auth/login" class="text-white hidden lg:inline-block text-md font-bold">Accounts</a>
+            </div>
+ 
+
+            <button class="flex lg:hidden">
+                <span class="material-symbols-outlined text-white" data-action="click->index#changeIcon" data-index-target="icon">
+                    menu
+                </span>
+            </button>
+        </div>
+
+
+        <div class="absolute top-[70px] left-0 bg-blue-500 w-full p-6 hidden lg:hidden border-t border-gray-100 flex flex-col gap-3" data-index-target="navigation" >
+            <a href="/admin" class="text-white text-md font-bold">Home</a>
+                <a href="/admin/accounts" class="text-white text-md font-bold">Accounts</a>
+                <a href="/auth/login" class="text-white text-md font-bold">Accounts</a>
+                <a href="/auth/login" class="text-white text-md font-bold">Accounts</a>
+                <a href="/auth/login" class="text-white text-md font-bold">Accounts</a>
+            </div>
+        </div>
+    </div>
+
+</div>

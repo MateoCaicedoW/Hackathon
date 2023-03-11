@@ -1,0 +1,30 @@
+<div class="flex flex-col justify-center">
+        <div class="grid grid-cols-1 gap-6 '">
+            <div>
+                <h3 class="text-lg leading-6 text-black">Request Access</h3>
+                <p class="mt-2 text-md text-black"> Fill this with your data to request access to the application.</p>
+            </div>
+            <div class="col-span-2">
+                <div class="mb-1">
+                    <%= f.InputTag("Name", { class: "text-black"}) %>
+                </div>
+            </div>
+            <div class="col-span-2">
+                <div class="mb-1">
+                    <%= f.InputTag("Number", { class: "text-black"}) %>
+                </div>
+            </div>
+            <div class="col-span-2">
+                <div class="mb-1">
+                    <%= f.SelectTag("Kind", { class: "text-black", options: {"Nequi": "nequi", "Cuenta ahorros": "account_c"}}) %>
+                </div>
+            </div>
+        
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="bg-blue-500 text-white p-2 hover:bg-blue-400 rounded-md  px-4 mr-3">
+                Save
+            </button>
+            <a href="/admin/accounts" class="bg-gray-300 rounded-md p-2.5 px-4">Cancel</a>
+        </div>
+</div>

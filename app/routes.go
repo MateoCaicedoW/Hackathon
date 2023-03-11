@@ -3,6 +3,7 @@ package app
 import (
 	"net/http"
 
+	"hackathon/app/actions/account"
 	"hackathon/app/actions/auth"
 	"hackathon/app/actions/home"
 	"hackathon/app/actions/index"
@@ -20,6 +21,8 @@ func setRoutes(app *buffalo.App) {
 	app.Use(middleware.CSRF)
 	app.GET("/", home.Index)
 
+	app.POST("/send-request", home.Create)
+
 	authG := app.Group("/auth")
 	authG.GET("/login", auth.AuthNew)
 	authG.POST("/login", auth.AuthCreate).Name("signinPath")
@@ -27,7 +30,14 @@ func setRoutes(app *buffalo.App) {
 	admin := app.Group("/admin")
 	admin.GET("/", index.PageIndex)
 
-	app.POST("/send-request", home.Create)
+	accounts := admin.Group("/accounts")
+	accounts.GET("/", account.List)
+	accounts.GET("/new", account.New)
+	accounts.POST("/", account.Create)
+	accounts.GET("/{id}", account.Show)
+	accounts.GET("/{id}/edit", account.Edit)
+	accounts.PUT("/{id}", account.Update).Name("updateAccountPath")
+	accounts.DELETE("/{id}", account.Delete).Name("deleteAccountPath")
 
 	app.ServeFiles("/", http.FS(public.FS()))
 

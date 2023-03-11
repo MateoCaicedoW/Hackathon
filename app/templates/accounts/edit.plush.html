@@ -1,0 +1,7 @@
+<%= partial("partials/nav.plush.html") %>
+
+<div class="w-[80%] lg:w-[50%] py-6 m-auto">
+    <%= form_for(account, {action: updateAccountPath({id: account.ID}), method: "PUT", class: " bg-white shadow-md p-4 rounded-md ", id: "" }){ %>
+        <%= partial("accounts/form.plush.html") %>
+    <% } %>
+</div>

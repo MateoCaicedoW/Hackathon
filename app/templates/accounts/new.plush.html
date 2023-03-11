@@ -1,0 +1,7 @@
+<%= partial("partials/nav.plush.html") %>
+
+<div class="w-[80%] lg:w-[50%] py-6 m-auto">
+    <%= form_for(account, {action: "/admin/accounts", method: "POST", class: " bg-white shadow-md p-4 rounded-md ", id: "" }){ %>
+        <%= partial("accounts/form.plush.html") %>
+    <% } %>
+</div>

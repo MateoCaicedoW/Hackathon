@@ -10,5 +10,5 @@ import (
 var r = render.Engine
 
 func PageIndex(c buffalo.Context) error {
-	return c.Render(http.StatusOK, r.String("Hello, World!"))
+	return c.Render(http.StatusOK, r.HTML("/dashboard/index.plush.html"))
 }
