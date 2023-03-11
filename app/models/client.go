@@ -14,3 +14,11 @@ type Client struct {
 }
 
 type Clients []Client
+
+func (c Client) SelectLabel() string {
+	return c.Person.FirstName + " " + c.Person.LastName
+}
+
+func (c Client) SelectValue() interface{} {
+	return c.ID
+}

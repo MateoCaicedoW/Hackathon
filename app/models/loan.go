@@ -9,7 +9,7 @@ import (
 type Loan struct {
 	ID         uuid.UUID `json:"id" db:"id"`
 	Mount      float64   `json:"mount" db:"mount"`
-	Commission float64   `json:"commission" db:"commission"`
+	Commission float64   `json:"commission" db:"commision"`
 	Date       time.Time `json:"date" db:"date"`
 	ClientID   uuid.UUID `json:"client_id" db:"client_id"`
 	Status     bool      `json:"status" db:"status"`

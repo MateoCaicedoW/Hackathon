@@ -8,6 +8,7 @@ import (
 	"hackathon/app/actions/clients"
 	"hackathon/app/actions/home"
 	"hackathon/app/actions/index"
+	ls "hackathon/app/actions/loan"
 	"hackathon/app/middleware"
 	"hackathon/public"
 
@@ -45,6 +46,10 @@ func setRoutes(app *buffalo.App) {
 	client.GET("/new", clients.New)
 	client.POST("/new", clients.Create)
 	client.GET("/", clients.List)
+
+	loan := admin.Group("/loans")
+	loan.GET("/", ls.List)
+	loan.GET("/new", ls.New)
 
 	app.ServeFiles("/", http.FS(public.FS()))
 
