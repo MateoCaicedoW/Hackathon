@@ -1,10 +1,12 @@
 const Webpack = require("webpack");
 const Glob = require("glob");
+const path = require('path');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const LiveReloadPlugin = require("webpack-livereload-plugin");
+const LiveReloadPlugin = require('@kooneko/livereload-webpack-plugin');
 
 const configurator = {
   entries: function(){
@@ -35,23 +37,28 @@ const configurator = {
   },
 
   plugins() {
+    var static_file_mapping = {};
     var plugins = [
-      new Webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery"}),
       new MiniCssExtractPlugin({filename: "[name].[contenthash].css"}),
       new CopyWebpackPlugin({
         patterns: [{
-          from: "./app/assets",
-          globOptions: {
-            ignore: [
-              "**/css/**", 
-              "**/js/**", 
-              "**/src/**",
-            ]
-          }
-        }],
+            from: "./app/assets",
+            to: "[path][name][ext]",
+            filter: async (resourcePath) => {
+              let ignore = resourcePath.match(/.*\/app\/assets\/(css|js)\/.*/g);
+              return !ignore;
+            },
+            transformPath(targetPath, absosutePath) {
+              relative_path = path.relative(path.resolve('./assets'),absosutePath)
+              static_file_mapping[relative_path] = targetPath;
+
+              return targetPath;
+            }
+        }]
       }),
       new Webpack.LoaderOptionsPlugin({minimize: true,debug: false}),
-      new WebpackManifestPlugin({fileName: "manifest.json",publicPath: ""})
+      new WebpackManifestPlugin({fileName: "manifest.json", seed: static_file_mapping}),
+      new CleanWebpackPlugin()
     ];
 
     return plugins
@@ -63,16 +70,14 @@ const configurator = {
         {
           test: /\.s[ac]ss$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            { loader: MiniCssExtractPlugin.loader, options: {publicPath: ''} },
             { loader: "css-loader", options: {sourceMap: true}},
             { loader: "postcss-loader", options: {sourceMap: true}},
             { loader: "sass-loader", options: {sourceMap: true}}
           ]
         },
-        { test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/},
-        { test: /\.jsx?$/,loader: "babel-loader",exclude: /node_modules/ },
-        { test: /\.(woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/,use: "url-loader"},
-        { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,use: "file-loader" },
+        { test: /\.jsx?$/, loader: "babel-loader", exclude: /node_modules/ },
+        { test: /\.(eot|woff|woff2|ttf|svg|png)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource' },
         { test: /\.go$/, use: "gopherjs-loader"}
       ]
     }
@@ -88,23 +93,33 @@ const configurator = {
       mode: env,
       entry: configurator.entries(),
       output: {
-        filename: "[name].[contenthash].js", 
+        filename: "[name].[contenthash].js",
         path: `${__dirname}/public/assets`,
-        clean: true,
+        publicPath: ''
       },
       plugins: configurator.plugins(),
       module: configurator.moduleOptions(),
       resolve: {
-        extensions: ['.ts', '.js', '.json']
+        extensions: ['.ts', '.tsx', '.js', '.json']
       }
     }
 
     if( env === "development" ){
-      config.plugins.push(new LiveReloadPlugin({appendScriptTag: true}))
+      config.plugins.push(new LiveReloadPlugin({appendScript: true}))
+      
       return config
     }
 
-    const terser = new TerserPlugin({
+    config.optimization = {
+      minimizer: [configurator.terser()]
+    }
+
+    return config
+  },
+  
+  // Terser returns the unglyfier used in production mode.
+  terser: function() {
+    return new TerserPlugin({
       terserOptions: {
         compress: {},
         mangle: {
@@ -116,12 +131,6 @@ const configurator = {
       },
       extractComments: false,
     })
-
-    config.optimization = {
-      minimizer: [terser]
-    }
-
-    return config
   }
 }
 
