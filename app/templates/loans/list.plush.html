@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th class="px-6 py-2 bg-white text-left font-semibold">Name</th>
-                        <th class="px-6 py-2 bg-white text-left font-semibold">Description</th>
+                        <th class="px-6 py-2 bg-white text-left font-semibold">Mount</th>
                         <th class="px-6 py-2 bg-white text-left"></th>
                     </tr>
                 </thead>
@@ -20,23 +20,19 @@
                             <div class="flex items-center">
                                 <div class="flex flex-col w-96">
                                         <a href="" class="no-underline text-black"><p class="font-semibold text-base w-80 truncate"></p></a>
-                                        <span class="text-gray-500 uppercase"></span>
+                                        <span class="text-gray-500 uppercase"><%= loan.Client.Person.FirstName %> <%= loan.Client.Person.LastName %></span>
                                 </div>
                             </div>
                         </td>
         
                         <td class="px-6 py-2 font-medium text-gray-900">
                             <div class="flex flex-col ">
-                                <%= if (account.Kind == "nequi") { %>
-                                    <p class="capitalize"><%= account.Kind %></p>
-                                <% }else{ %>
-                                 <p class="capitalize">Cuenta de ahorros</p>
-                                <% } %>
+                                <%= loan.Mount %>
                             </div>
                         </td>
         
                         <td class="flex px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900 justify-end items-center">
-                            <a href="/admin/accounts//edit" class="flex items-center py-2 px-3 hover:text-gray-900">
+                            <a href="<%= editLoanPath({loan_id: loan.ID}) %>" class="flex items-center py-2 px-3 hover:text-gray-900">
                             <span class="material-symbols-outlined text-xl mr-1">
                                 drive_file_rename_outline
                                 </span>

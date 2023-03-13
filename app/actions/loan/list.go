@@ -18,7 +18,7 @@ func List(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 
 	loans := &[]models.Loan{}
-	if err := tx.All(loans); err != nil {
+	if err := tx.Eager("Client.Person").All(loans); err != nil {
 		return err
 	}
 

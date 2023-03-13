@@ -2,6 +2,7 @@ package loan
 
 import (
 	"hackathon/app/models"
+	"time"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop/v6"
@@ -12,9 +13,10 @@ func New(c buffalo.Context) error {
 
 	clients := &[]models.Client{}
 	tx := c.Value("tx").(*pop.Connection)
-	if err := tx.Eager("People").All(clients); err != nil {
+	if err := tx.Eager("Person").All(clients); err != nil {
 		return err
 	}
+	loan.Date = time.Now()
 
 	c.Set("clients", clients)
 

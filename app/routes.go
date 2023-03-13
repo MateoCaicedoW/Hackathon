@@ -57,6 +57,9 @@ func setRoutes(app *buffalo.App) {
 	loan := admin.Group("/loans")
 	loan.GET("/", ls.List)
 	loan.GET("/new", ls.New)
+	loan.POST("/new", ls.Create)
+	loan.GET("/{loan_id}", ls.Edit).Name("editLoanPath")
+	loan.PUT("/{loan_id}", ls.Update).Name("updateLoanPath")
 
 	app.ServeFiles("/", http.FS(public.FS()))
 
